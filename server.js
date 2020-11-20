@@ -13,6 +13,8 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
 const teamMemberArray = [];
+// Write code to use inquirer to gather information about the development team members,
+// and to create objects for each team member (using the correct classes as blueprints!)
 
 function createManager() {
     console.log("Please enter your team's manager info...");
@@ -20,7 +22,7 @@ function createManager() {
         {
             type: "input",
             name: "managerName",
-            message: "What is your team manager's name?"
+            message: "What is your manager's name?"
         },
         {
             type: "input",
@@ -93,34 +95,7 @@ function createEngineer() {
 }
 
 //create intern function goes here
-function createIntern() { 
-    inquirer.prompt([
-        {
-            type: "input",
-            name: "internName",
-            message: "What is your intern's name?"
-        },
-        {
-            type: "input",
-            name: "internId",
-            message: "What is your intern's ID number?"
-        },
-        {
-            type: "input",
-            name: "internEmail",
-            message: "What is your intern's Email address?"
-        },
-        {
-            type: "input",
-            name: "internSchool",
-            message: "What is your intern's school?"
-        }
-    ]).then(function (answers) {
-        const intern = new Intern(answers.internId, answers.internName, answers.internEmail, answers.internSchool);
-        teamMemberArray.push(intern);
-        createTeam();
-    }) 
-}
+
 
 
 function buildTeam() {
