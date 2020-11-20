@@ -86,32 +86,22 @@ function addteamMember() {
 }
 
 function GeneratingTeamHTML() {
-     fs.readFile(__dirname + "/main.html", function (err,data) { 
-         if (err) throw err;
-         console.log(data);
-         console.log(html);
-     })
-
-
-    // fs.appendFile(outputPath, html, function (err) {
-    //     if (err) throw err;
-    // });
-    // `<!DOCTYPE html>
-    // <html lang="en">
-    // <head>
-    //     <meta charset="UTF-8">
-    //     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    //     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    //     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    //     <title>Team Profile</title>
-    // </head>
-    // <body>
-    //     <nav class="navbar navbar-dark bg-dark mb-5">
-    //         <span class="navbar-brand mb-0 h1 w-100 text-center">Employee Summary</span>
-    //     </nav>
-    //     <div class="container">
-    //         <div class="row">`;
-    fs.writeFile(outputPath, "/main.html", function (err) {
+    const html = `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>Team Profile</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-dark bg-dark mb-5">
+            <span class="navbar-brand mb-0 h1 w-100 text-center">Employee Summary</span>
+        </nav>
+        <div class="container">
+            <div class="row">`;
+    fs.writeFile(outputPath, html, function (err) {
         if (err) throw err;
     });
     console.log("generating html start");
@@ -119,52 +109,51 @@ function GeneratingTeamHTML() {
 
 function addMemberHTML(newMember) { 
     return new Promise(function (resolve,reject) {
-        // const name = newMember.getName();
+        const name = newMember.getName();
         const role = newMember.getRole();
-        // const id = newMember.getId();
-        // const email = newMember.getEmail();
-        // const github = newMember.getGithub();
+        const id = newMember.getId();
+        const email = newMember.getEmail();
+        
 
         let data = "";
         if (role === "Engineer") {
-           
-           fs.readFile(__dirname + "/engineer.html");
-        //      `<div class="col-6">
-        //     <div class="card mx-auto mb-3" style="width: 18rem">
-        //     <h5 class="card-header">${name}<br /><br />Engineer</h5>
-        //     <ul class="list-group list-group-flush">
-        //         <li class="list-group-item">ID: ${id}</li>
-        //         <li class="list-group-item">Email Address: ${email}</li>
-        //         <li class="list-group-item">GitHub: ${github}</li>
-        //     </ul>
-        //     </div>
-        // </div>`;
+            const github = newMember.getGithub();
+            data =  `<div class="col-6">
+
+            <div class="card mx-auto mb-3" style="width: 18rem">
+            <h5 class="card-header">${name}<br /><br />Engineer</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${id}</li>
+                <li class="list-group-item">Email Address: ${email}</li>
+                <li class="list-group-item">GitHub: ${github}</li>
+            </ul>
+            </div>
+        </div>`;
         } else if (role === "Intern") {
-             fs.readFile(__dirname + "/intern.html");
-        //     const school = newMember.getSchool();
-        //     data = `<div class="col-6">
-        //     <div class="card mx-auto mb-3" style="width: 18rem">
-        //     <h5 class="card-header">${name}<br /><br />Intern</h5>
-        //     <ul class="list-group list-group-flush">
-        //         <li class="list-group-item">ID: ${id}</li>
-        //         <li class="list-group-item">Email Address: ${email}</li>
-        //         <li class="list-group-item">School: ${school}</li>
-        //     </ul>
-        //     </div>
-        // </div>`;
+             
+            const school = newMember.getSchool();
+            data = `<div class="col-6">
+            <div class="card mx-auto mb-3" style="width: 18rem">
+            <h5 class="card-header">${name}<br /><br />Intern</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${id}</li>
+                <li class="list-group-item">Email Address: ${email}</li>
+                <li class="list-group-item">School: ${school}</li>
+            </ul>
+            </div>
+        </div>`;
         } else {
-           fs.readFile(__dirname + "/manager.html");
-        //     const officenumber = newMember.getOfficeNumber();
-        //     data = `<div class="col-6">
-        //     <div class="card mx-auto mb-3" style="width: 18rem">
-        //     <h5 class="card-header">${name}<br /><br />Manager</h5>
-        //     <ul class="list-group list-group-flush">
-        //         <li class="list-group-item">ID: ${id}</li>
-        //         <li class="list-group-item">Email Address: ${email}</li>
-        //         <li class="list-group-item">Office Phone: ${officenumber}</li>
-        //     </ul>
-        //     </div>
-        // </div>`;
+            const officenumber = newMember.getOfficeNumber();
+            data = `<div class="col-6">
+            <div class="card mx-auto mb-3" style="width: 18rem">
+            <h5 class="card-header">${name}<br /><br />Manager</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${id}</li>
+                <li class="list-group-item">Email Address: ${email}</li>
+                <li class="list-group-item">Office Phone: ${officenumber}</li>
+            </ul>
+            </div>
+        </div>`;
         }
         console.log("Adding new team member");
         fs.appendFile(outputPath, data, function (err) {
@@ -177,16 +166,16 @@ function addMemberHTML(newMember) {
     });
 }
 
-// function completeHTML() { 
-//     const html = `</div>
-//     </div>
-//     </body>
-//     </html>`
-//     fs.appendFile(outputPath, html, function (err) {
-//         if (err) throw err;
-//     });
-//     console.log("finishing html");
-// }
+function completeHTML() { 
+    const html = `</div>
+    </div>
+    </body>
+    </html>`
+    fs.appendFile(outputPath, html, function (err) {
+        if (err) throw err;
+    });
+    console.log("finishing html");
+}
 
 startApp();
 // After the user has input all employees desired, call the `render` function (required
